@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "725853106489",
+    "firebase_url": "https://notuygulamam.firebaseio.com",
+    "project_id": "notuygulamam",
+    "storage_bucket": "notuygulamam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725853106489:android:405779d7f81384b9d478e8",
+        "android_client_info": {
+          "package_name": "com.example.notuygulamam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725853106489-b0anmmjqn7urt04916glpkvjn9p61esb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.notuygulamam",
+            "certificate_hash": "7cdb2b186d2a53658143e6d1dbdc27a844d18aa3"
+          }
+        },
+        {
+          "client_id": "725853106489-ssk630lvlsuqcj5n2c1d9hsjr1g2ht3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtXPvWqMVg52U1yqzrBdqrgeNsVG19ucw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725853106489-ssk630lvlsuqcj5n2c1d9hsjr1g2ht3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
