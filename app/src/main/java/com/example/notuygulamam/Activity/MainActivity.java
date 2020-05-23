@@ -4,35 +4,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.notuygulamam.Fragments.BildirimFragment;
+import com.example.notuygulamam.Fragments.ProfilFragment;
 import com.example.notuygulamam.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.example.notuygulamam.Fragments.HomeFragment;
-import com.example.notuygulamam.Fragments.ProfileFragment;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -165,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new HomeFragment();
                     break;
                 case R.id.navigation_dashboard:
-                    fragment = new ProfileFragment();
+                    fragment = new ProfilFragment();
                     break;
                 case R.id.navigation_notifications:
                     fragment = new BildirimFragment();
