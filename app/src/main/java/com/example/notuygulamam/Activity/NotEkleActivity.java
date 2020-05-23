@@ -66,6 +66,7 @@ public class NotEkleActivity extends AppCompatActivity {
         mStorageRef= FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("uploads");
 
+
         mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,17 +138,13 @@ public class NotEkleActivity extends AppCompatActivity {
                     Uri downloadUrl = urlTask.getResult();
                     Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
                             mEditTextKonu.getText().toString().trim(),
-                            downloadUrl.toString());
+                            downloadUrl.toString()
+                            );
                     String uploadId = mDatabaseRef.push().getKey();
                     mDatabaseRef.child(uploadId).setValue(upload);
                     Log.i("notimg",""+downloadUrl);
                     Toast.makeText(NotEkleActivity.this,"Yükleme başarılı",Toast.LENGTH_SHORT).show();
-                   /* Upload upload;
-                    upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                            mEditTextKonu.getText().toString().trim(),
-                            taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
-                    String uploadId=mDatabaseRef.push().getKey();
-                    mDatabaseRef.child(uploadId).setValue(upload); */
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -170,4 +167,5 @@ public class NotEkleActivity extends AppCompatActivity {
         Intent intent =new Intent(NotEkleActivity.this,ActivityImages.class);
         startActivity(intent);
     }
+
 }

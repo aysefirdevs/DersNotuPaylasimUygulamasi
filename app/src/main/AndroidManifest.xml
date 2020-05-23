@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ActivityImages"></activity>
+        <activity android:name=".Activity.BosActivity"></activity>
+        <activity android:name=".Activity.ActivityImages" />
         <activity android:name=".Activity.NotEkleActivity" />
         <activity android:name=".Activity.KayitOlActivity" />
         <activity android:name=".Activity.GirisActivity" />

@@ -8,7 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +43,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         Upload uploadCurrent=mUploads.get(position);
         holder.textViewName.setText(uploadCurrent.getName());
         holder.textViewKonu.setText(uploadCurrent.getKonu());
+
         Picasso.get()
                 .load(uploadCurrent.getImageUrl())
                 .fit()
@@ -58,6 +61,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         public TextView textViewName;
         public ImageView imageView;
         public TextView textViewKonu;
+        public RatingBar RatingBar;
+        public Button oyVer;
 
 
         public ImageViewHolder(@NonNull View itemView) {
@@ -66,9 +71,21 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             textViewName=itemView.findViewById(R.id.text_view_name);
             imageView=itemView.findViewById(R.id.image_view_upload);
             textViewKonu=itemView.findViewById(R.id.text_view_konu);
+            RatingBar=itemView.findViewById(R.id.ratingbar);
+            oyVer=itemView.findViewById(R.id.oyVer);
+
 
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
+
+            oyVer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    float GelenOylama=RatingBar.getRating();
+                    Log.i("Gelen Oylama",String.valueOf(GelenOylama));
+                }
+            });
+
         }
 
         @Override
@@ -83,10 +100,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            menu.setHeaderTitle("Fotoğraf silinsin mi?");
-         //   MenuItem doWhatever=menu.add(Menu.NONE,1,1,"Do whatever");
-            MenuItem delete=menu.add(Menu.NONE,1,1,"Sil");
-          //  doWhatever.setOnMenuItemClickListener(this);
+            menu.setHeaderTitle("Fotoğraf Silinsin mi?");
+            MenuItem delete=menu.add(Menu.NONE,1,1,"Fotoğrafı Sil");
             delete.setOnMenuItemClickListener(this);
         }
 
@@ -100,6 +115,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                             mListener.onDeleteClick(position);
                             Log.i("deleteimg","");
                             return true;
+
                     }
                 }
             }
@@ -109,7 +125,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     public interface OnItemClickListener{
         void onItemClick(int position);
-       // void onWhatEverClick(int position);
         void onDeleteClick(int position);
 
 

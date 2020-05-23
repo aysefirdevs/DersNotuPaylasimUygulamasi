@@ -4,30 +4,47 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.notuygulamam.Fragments.BildirimFragment;
 import com.example.notuygulamam.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.example.notuygulamam.Fragments.HomeFragment;
 import com.example.notuygulamam.Fragments.ProfileFragment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     public FirebaseAuth auth;
     public FirebaseUser user;
-    private FloatingActionButton fabMain,fabBirinci,fabikinci;
-    private Animation fabacik,fabkapali,geridon,ileridon;
-    private Boolean fabDurum=false;
+    public FloatingActionButton fabMain, fabBirinci, fabikinci;
+    private Animation fabacik, fabkapali, geridon, ileridon;
+    private Boolean fabDurum = false;
+    DatabaseReference ref;
+    String userId;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,54 +57,88 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.setItemIconTintList(null);
 
-        fabMain=findViewById(R.id.fabMain);
-        fabBirinci=findViewById(R.id.fabBirinci);
-        fabikinci=findViewById(R.id.fabikinci);
-        fabacik= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fabacik);
-        fabkapali= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fabkapali);
-        geridon= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.geridon);
-        ileridon= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.ileridon);
+        fabMain = findViewById(R.id.fabMain);
+        fabBirinci = findViewById(R.id.fabBirinci);
+        fabikinci = findViewById(R.id.fabikinci);
+        fabacik = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fabacik);
+        fabkapali = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fabkapali);
+        geridon = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.geridon);
+        ileridon = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.ileridon);
+
 
         fabMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(fabDurum)
-                {
+                if (fabDurum) {
                     //tıklandığında kapansın
                     fabMain.startAnimation(geridon);
                     fabBirinci.startAnimation(fabkapali);
                     fabikinci.startAnimation(fabkapali);
                     fabBirinci.setClickable(false);
                     fabikinci.setClickable(false);
-                    fabDurum=false;
-                }
-                else
-                {
+                    fabDurum = false;
+                } else {
                     //tıklandığında açılsın
                     fabMain.startAnimation(ileridon);
                     fabBirinci.startAnimation(fabacik);
                     fabikinci.startAnimation(fabacik);
                     fabBirinci.setClickable(true);
                     fabikinci.setClickable(true);
-                    fabDurum=true;
+                    fabDurum = true;
                     fabBirinci.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(MainActivity.this,NotEkleActivity.class);
+                            Intent intent = new Intent(MainActivity.this, NotEkleActivity.class);
                             startActivity(intent);
                         }
                     });
                     fabikinci.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(MainActivity.this,ActivityImages.class);
+                            Intent intent = new Intent(MainActivity.this, ActivityImages.class);
                             startActivity(intent);
                         }
                     });
                 }
             }
         });
+     /*   if(query.equals("PxMt2eDGj5O47OeIAXrvspmS0HR2")){
+            fabikinci.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent =new Intent(MainActivity.this,BosActivity.class);
+                    startActivity(intent);
 
+                }
+            });
+        } */
+   /*  userId=user.getUid();
+     ref= FirebaseDatabase.getInstance().getReference();
+    //final Query query=ref.orderByChild("Kullanicilar").equalTo("PxMt2eDGj5O47OeIAXrvspmS0HR2");
+        Query query = ref.child("Kullanicilar").child(userId).equalTo("PxMt2eDGj5O47OeIAXrvspmS0HR2");
+     query.addListenerForSingleValueEvent(new ValueEventListener() {
+         @Override
+         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+             if(ref.equals("PxMt2eDGj5O47OeIAXrvspmS0HR2")==true) {
+                 fabikinci.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         Toast.makeText(getApplicationContext(),"key aljndı",Toast.LENGTH_SHORT).show();
+                         Intent intent = new Intent(MainActivity.this, BosActivity.class);
+                         startActivity(intent);
+
+                     }
+                 });
+             }
+         }
+
+         @Override
+         public void onCancelled(@NonNull DatabaseError databaseError) {
+
+         }
+     });
+
+*/
     }
 
     public void tanimla() {
@@ -140,11 +191,10 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public void cik(){
+    public void cik() {
         auth.signOut();
         Intent intent = new Intent(MainActivity.this, GirisActivity.class);
         startActivity(intent);
         finish();
     }
-
 }

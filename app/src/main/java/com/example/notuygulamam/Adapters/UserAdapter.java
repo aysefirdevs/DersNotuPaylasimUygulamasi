@@ -49,10 +49,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
-    //viewlere setlemeler yapılacak
     @Override
     public void onBindViewHolder(final @NonNull ViewHolder holder, final int position) {
-       // holder.usernameTextView.setText(userKeysList.get(position).toString());
         reference.child("Kullanicilar").child(userKeysList.get(position).toString()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -84,7 +82,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         return userKeysList.size();
     }
 
-    //viewlerin tanımlanma işlemleri
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView usernameTextView;

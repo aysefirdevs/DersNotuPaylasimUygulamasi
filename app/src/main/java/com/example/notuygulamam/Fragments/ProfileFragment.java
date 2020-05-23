@@ -20,6 +20,7 @@ import com.example.notuygulamam.Models.KullaniciBilgileri;
 import com.example.notuygulamam.R;
 import com.example.notuygulamam.Utils.ChangeFragment;
 import com.example.notuygulamam.Utils.RandomName;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -70,7 +71,7 @@ public class ProfileFragment extends Fragment {
         profile_image=(CircleImageView) view.findViewById(R.id.profile_image);
         bilgi_guncelle=(Button) view.findViewById(R.id.bilgi_guncelle);
         bilgiArkadasButon=(Button) view.findViewById(R.id.bilgiArkadasButon);
-      //  bilgiİstekButon=(Button) view.findViewById(R.id.bilgiİstekButon);
+        //  bilgiİstekButon=(Button) view.findViewById(R.id.bilgiİstekButon);
         firebaseStorage=FirebaseStorage.getInstance();
         storageReference=firebaseStorage.getReference();
         bilgi_guncelle.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +102,7 @@ public class ProfileFragment extends Fragment {
         profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               galeriAc();
+                galeriAc();
             }
 
         });
@@ -117,18 +118,27 @@ public class ProfileFragment extends Fragment {
     private void galeriAc(){
         Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent,5);
-
     }
 
-   public void onActivityResult(int requestCode,int resultCode,Intent data)
+    public void onActivityResult(int requestCode,int resultCode,Intent data)
     {
         if(requestCode==5 && resultCode== Activity.RESULT_OK){
-             Uri filePath= data.getData();
+            Uri filePath= data.getData();
             Log.i("profilresim",""+filePath);
-             StorageReference ref= storageReference.child("profilresimleri").child(RandomName.getSaltString()+".jpg");
-            ref.putFile(filePath).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            final StorageReference ref= storageReference.child("profilresimleri").child(RandomName.getSaltString()+".jpg");
+            ref.putFile(filePath).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+
+                    // Continue with the task to get the download URL
+                    return ref.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(getContext(),"Profil fotoğrafı güncellendi.",Toast.LENGTH_LONG).show();
                         String isim=kullaniciAdi.getText().toString();
@@ -138,19 +148,20 @@ public class ProfileFragment extends Fragment {
 
                         reference=database.getReference().child("Kullanicilar").child(auth.getUid());
                         Map map=new HashMap();
+                        Uri downloadUri = task.getResult();
 
                         map.put("kullaniciAdi",isim);
                         map.put("okul",egitim);
                         map.put("bolum",bolum);
                         map.put("sınıf",sinif);
-                        map.put("resim",task.getResult().getMetadata().getReference().getDownloadUrl().toString()); //buraya bi kez daha bak sonra
+                        map.put("resim",downloadUri.toString()); //buraya bi kez daha bak sonra
                         reference.setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
-                                      ChangeFragment fragment = new ChangeFragment(getContext());
-                                      fragment.change(new ProfileFragment());
-                                   // Toast.makeText(getContext(),"bilgiler basariyla guncellendi..",Toast.LENGTH_LONG).show();
+                                    ChangeFragment fragment = new ChangeFragment(getContext());
+                                    fragment.change(new ProfileFragment());
+                                    // Toast.makeText(getContext(),"bilgiler basariyla guncellendi..",Toast.LENGTH_LONG).show();
                                 }
                                 else {
                                     Toast.makeText(getContext(),"Bilgiler guncellenmedi...",Toast.LENGTH_LONG).show();

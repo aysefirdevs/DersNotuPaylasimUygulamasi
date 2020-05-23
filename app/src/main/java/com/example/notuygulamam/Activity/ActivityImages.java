@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.notuygulamam.Fragments.ArkadaslarFragment;
 import com.example.notuygulamam.Models.Upload;
 import com.example.notuygulamam.R;
 import com.example.notuygulamam.Adapters.ImageAdapter;
+import com.example.notuygulamam.Utils.ChangeFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -95,6 +98,7 @@ public class ActivityImages extends AppCompatActivity implements ImageAdapter.On
             }
         });
     }
+
 
     @Override
     protected void onDestroy() {

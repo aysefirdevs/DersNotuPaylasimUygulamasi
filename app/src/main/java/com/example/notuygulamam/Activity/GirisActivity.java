@@ -14,8 +14,11 @@ import android.widget.Toast;
 import com.example.notuygulamam.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 
 public class GirisActivity extends AppCompatActivity {
 
@@ -23,6 +26,8 @@ public class GirisActivity extends AppCompatActivity {
     public Button button_login;
     public FirebaseAuth auth;
     public TextView hesapYok;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +68,7 @@ public class GirisActivity extends AppCompatActivity {
             }
         });
     }
-    public void sistemeGiris(String email,String pass)
+    public void sistemeGiris(final String email, String pass)
     {
         auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -74,11 +79,16 @@ public class GirisActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
+
                 else
                 {
                     Toast.makeText(getApplicationContext(),"E-posta veya şifrenizi kontrol edin.",Toast.LENGTH_LONG).show();
                 }
+
             }
         });
     }
+
+
+
 }
