@@ -71,7 +71,6 @@ public class ProfilFragment extends Fragment {
         profile_image=(CircleImageView) view.findViewById(R.id.profile_image);
         bilgi_guncelle=(Button) view.findViewById(R.id.bilgi_guncelle);
         bilgiArkadasButon=(Button) view.findViewById(R.id.bilgiArkadasButon);
-        //  bilgiİstekButon=(Button) view.findViewById(R.id.bilgiİstekButon);
         firebaseStorage=FirebaseStorage.getInstance();
         storageReference=firebaseStorage.getReference();
         bilgi_guncelle.setOnClickListener(new View.OnClickListener() {
@@ -88,15 +87,6 @@ public class ProfilFragment extends Fragment {
                 changeFragment.change(new ArkadaslarFragment());
             }
         });
-
-      /*  bilgiİstekButon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChangeFragment changeFragment=new ChangeFragment(getContext());
-                changeFragment.change(new BildirimFragment());
-            }
-        }); */
-
 
 
         profile_image.setOnClickListener(new View.OnClickListener() {

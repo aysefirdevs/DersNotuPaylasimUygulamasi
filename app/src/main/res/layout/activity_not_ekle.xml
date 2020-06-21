@@ -9,8 +9,9 @@
 
     <Button
         android:id="@+id/button_choose_image"
-        android:layout_width="wrap_content"
+        android:layout_width="126dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
         android:text="Fotoğraf seç" />
 
     <EditText
@@ -33,10 +34,11 @@
 
     <Button
         android:id="@+id/button_upload"
-        android:layout_width="wrap_content"
+        android:layout_width="141dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/rounded_button"
         android:text="Fotoğrafı yükle"></Button>
 
     <TextView
@@ -51,6 +53,7 @@
         android:layout_toEndOf="@+id/button_upload"
         android:layout_toRightOf="@+id/button_upload"
         android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
         android:text="Yüklemeyi Göster"
         android:textSize="18sp"></TextView>
 

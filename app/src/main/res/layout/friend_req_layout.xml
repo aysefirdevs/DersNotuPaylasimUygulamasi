@@ -25,7 +25,8 @@
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_margin="10dp"
-                android:layout_weight="2" />
+                android:layout_weight="2"
+                app:civ_border_color="@color/colorAccent" />
 
             <TextView
                 android:id="@+id/friend_req_text"
@@ -46,13 +47,19 @@
                 <Button
                     android:id="@+id/friend_req_ekle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/rounded_button"
                     android:text="Kabul et"></Button>
 
                 <Button
                     android:id="@+id/friend_req_red"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="38dp"
+
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/rounded_button"
                     android:text="Reddet"></Button>
             </LinearLayout>
 

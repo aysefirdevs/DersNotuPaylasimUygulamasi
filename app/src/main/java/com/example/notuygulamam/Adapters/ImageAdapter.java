@@ -1,6 +1,7 @@
 package com.example.notuygulamam.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;

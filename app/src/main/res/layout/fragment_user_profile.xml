@@ -30,7 +30,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="27dp"
                 android:src="@drawable/defaultprofile"
-                app:civ_border_color="#FF000000"
+                app:civ_border_color="@color/colorAccent"
                 app:civ_border_width="2dp" />
             <TextView
                 android:layout_width="match_parent"
@@ -49,6 +49,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:text="Genel Bilgiler"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20dp"
                 android:textStyle="bold"></TextView>
 
@@ -122,6 +123,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="20dp"
                     android:text="0 Arkadaş"
+                    android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"></TextView>
 
 

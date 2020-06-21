@@ -26,6 +26,7 @@ public class Upload {
 
     }
 
+
     public String getKonu() {
         return mKonu;
     }

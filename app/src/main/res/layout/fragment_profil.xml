@@ -29,7 +29,7 @@
                 android:layout_marginEnd="171dp"
                 android:layout_marginBottom="27dp"
                 android:src="@drawable/defaultprofile"
-                app:civ_border_color="#FF000000"
+                app:civ_border_color="@color/colorAccent"
                 android:layout_gravity="center"
                 app:civ_border_width="2dp"
                 app:layout_constraintBottom_toTopOf="@+id/kullaniciAdi"
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Temel Bilgiler"
-                android:textColor="#000"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -131,12 +131,14 @@
 
             <Button
                 android:id="@+id/bilgi_guncelle"
-                android:layout_width="wrap_content"
-                android:layout_height="52dp"
+                android:layout_width="194dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="93dp"
+                android:background="@drawable/rounded_button"
                 android:text="Bilgilerimi Güncelle"
+                android:textColor="#ffff"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/input_sinif" />
@@ -156,7 +158,9 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
+                    android:textColor="#ffff"
                     android:padding="10dp"
+                    android:background="@drawable/rounded_button"
                     android:text="Arkadaşlarınız" />
 
             </LinearLayout>

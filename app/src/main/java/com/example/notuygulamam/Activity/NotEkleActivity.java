@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +63,7 @@ public class NotEkleActivity extends AppCompatActivity {
         mEditTextKonu=findViewById(R.id.edit_text_konu);
         mProgressBar=findViewById(R.id.progress_bar);
         mImageView=findViewById(R.id.image_view);
+
 
         mStorageRef= FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef= FirebaseDatabase.getInstance().getReference("uploads");
@@ -136,7 +138,7 @@ public class NotEkleActivity extends AppCompatActivity {
                     Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
                     while (!urlTask.isSuccessful());
                     Uri downloadUrl = urlTask.getResult();
-                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
+                    Upload upload =  new Upload(mEditTextFileName.getText().toString().trim(),
                             mEditTextKonu.getText().toString().trim(),
                             downloadUrl.toString()
                             );
